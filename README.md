@@ -26,3 +26,9 @@ There is a disadvantage of using it with node though. I plan to implement pan & 
 Like to contribute? Have suggestions? Feel free to contact me. I am not a jerk.
 
 Found issues? Awesome. If you can fix it, even better! Otherwise, just let me know (provide an example as well) and I'll look into it as soon as I get the chance.
+
+Minify the core library:
+
+```
+bash compile_min_js.sh
+```
