@@ -1,6 +1,6 @@
 var express = require('express');
 var canvas = require('canvas');
-var canvasCharts = require('../../canvas-charts.js');
+var canvasCharts = require('../../canvas-charts.min.js');
 var app = express.createServer();
 var io = require('socket.io').listen(app);
 var crypto = require('crypto');
