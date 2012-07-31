@@ -5,6 +5,8 @@
 		<script src="../canvas-charts.js" type="text/javascript"></script>
 		<!--plugin for line series graph-->
 		<script src="../cc.line.js" type="text/javascript"></script>
+		<!--plugin for vertical bar graph-->
+		<script src="../cc.vbar.js" type="text/javascript"></script>
 		
 		<!--demo files-->
 		<script src="client-side-demo.js" type="text/javascript"></script>
@@ -20,7 +22,7 @@
 		</script>
 	</head>
 	<body>
-	<h1>x-axis:</h1><input type="text" value="50,100,150,200,250,300,350,400,450,500" id="xaxislabels" size="50"/><br/>
+	<h1>x-axis:</h1><input type="text" value="50,100,150,200,250,300" id="xaxislabels" size="50"/><br/>
 	<h1>y-axis:</h1><input type="text" value="Jan,Feb,Mar,Apr,May,Jun,Jul" id="yaxislabels" size="50"/><br/>
 	<h1>data:</h1><input type="text" value="50,100,20,250,300,500,300" id="dataInput" size="75"/><br/>
 	<h1>graph type:</h1>
@@ -29,6 +31,9 @@
 	<br/>
 	<label>line graph</label>
 	<input type="radio" name="graphType" value="line" onclick="setGraphType(this.value);"/>
+	<br/>
+	<label>vertical bar graph</label>
+	<input type="radio" name="graphType" value="vbar" onclick="setGraphType(this.value);"/>
 	<br/>
 	<button onclick="generateGraph()">Generate graph</button>
 	<br/>

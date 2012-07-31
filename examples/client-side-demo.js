@@ -31,6 +31,9 @@ function demo(data, xaxis, yaxis, graphType) {
 		else if(graphType == "line"){
 			chartingCanvas.drawChart(yaxis, 50, xaxis, 35, data);
 		}
+		else if(graphType == "vbar"){
+			chartingCanvas.drawChart(yaxis, 50, xaxis, 35, data);
+		}
     	chartingCanvas.showChart();
     }
 	else{

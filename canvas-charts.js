@@ -173,6 +173,14 @@ CanvasCharts.prototype.drawChart = function(xAxis, xAxisStep, yAxis, yAxisStep, 
                 console.log("Could not find the line drawing function. Did you forget to add the 'cc.line.js' file?");
             }
         }
+		else if(this.chartType == "vbar"){
+			if(typeof this.drawVBars === 'function'){
+                this.drawVBars(data, xAxisStep);
+            }
+            else{
+                console.log("Could not find the vbars drawing function. Did you forget to add the 'cc.vbar.js' file?");
+            }
+		}
 	}
 	else{
 		console.log("Context is null. Cannot draw!");
@@ -338,4 +346,4 @@ CanvasCharts.prototype.destroyCanvas = function(){
 	console.log("canvas destroyed");
 };
 
-module.exports = new CanvasCharts();
+if(typeof module !== "undefined"){module.exports = new CanvasCharts();}

@@ -1,5 +1,6 @@
 CanvasCharts.prototype.drawLineSeries = function(data, stepValue){
-    var x = this.startX;
+	//start a little away from the y-axis
+    var x = this.startX + 10;
     //create the gradient for the line
     this.createGradient();
     //number of data points we need to plot
