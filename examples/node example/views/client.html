@@ -1,69 +1,69 @@
 <html>
-	<head>
-		<script src="/socket.io/socket.io.js"></script>
-		<script>
-		  	var socket = io.connect();
-			
-		  	function bodyOnLoad(){
-				var axisx = ["50", "100", "150", "200", "250", "300", "350", "400", "450", "500"];
-				var axisy = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Dec", "Jan", "Feb"];
-				var data = [105, 78, 72, 55, 53, 62, 72, 65, 55];
-				document.getElementById("xaxislabels").value = axisx;
-				document.getElementById("yaxislabels").value = axisy;
-				document.getElementById("dataInput").value = data;
-		  	}
-		  	
-		  	function generateGraph(){
-		  		var obj = {};
-				obj.xaxis = document.getElementById("xaxislabels").value.split(",");
-		  		obj.yaxis = document.getElementById("yaxislabels").value.split(",");
-		  		obj.data = document.getElementById("dataInput").value.split(",");
-		  		obj.width = parseInt(document.getElementById("canvasWidth").value, 10);
-		  		obj.height = parseInt(document.getElementById("canvasHeight").value, 10);
-		  		if(obj.xaxis.length <= 0 || obj.yaxis.length <= 0 || obj.data.length <= 0 ){
-		  			alert("Please enter at least one value for x-axis/y-axis and for the data.");
-		  		}
-		  		else{
-					obj.graphType = "hbar";
-		  			//convert to the integers
-		  			for(var i = 0 ; i < obj.data.length ; i++){
-		  				obj.data[i] = parseInt(obj.data[i], 10);
-		  			}
-		  			socket.emit('generate graph', obj);
-		  		}
-		  	}
-		  	
-			function setGraphType(val){
-				graphType = val;
-			}
-			
-		  	socket.on('response', function(res){
-		  		if(typeof res !== "undefined"){
-		  			if(res.hasOwnProperty("data")){
-		  				var img = document.createElement("img");
-			  			img.src = res.data;
-			  			//clear existing graph (if any)
-			  			document.getElementById("graph").innerHTML = "";
-			  			//set the new html
-			  			document.getElementById("graph").appendChild(img);
-		  			}
-					else if(res.hasOwnProperty("error")){
-						console.log("epic failure! see node logs...");
-						document.getElementById("graph").innerHTML = res.error;
-					}
-		  		}
-		  	});
-		</script>
-	</head>
-	<body onload="bodyOnLoad()">
-	<h1>canvas width:</h1><input type="text" value="500" id="canvasWidth" size="15"/><br/>
-	<h1>canvas height:</h1><input type="text" value="450" id="canvasHeight" size="15"/><br/>
-	<h1>x-axis:</h1><input type="text" value="" id="xaxislabels" size="50"/><br/>
-	<h1>y-axis:</h1><input type="text" value="" id="yaxislabels" size="50"/><br/>
-	<h1>data:</h1><input type="text" value="" id="dataInput" size="75"/><br/>
-	<button onclick="generateGraph()">Generate graph</button>
-	<br/>
-	<br/>
-	<div id="graph"></div>
-	</body>
+    <head>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io.connect();
+
+            function bodyOnLoad(){
+                var axisx = ["50", "100", "150", "200", "250", "300", "350", "400", "450", "500"];
+                var axisy = ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Dec", "Jan", "Feb"];
+                var data = [105, 78, 72, 55, 53, 62, 72, 65, 55];
+                document.getElementById("xaxislabels").value = axisx;
+                document.getElementById("yaxislabels").value = axisy;
+                document.getElementById("dataInput").value = data;
+            }
+
+            function generateGraph(){
+                var obj = {};
+                obj.xaxis = document.getElementById("xaxislabels").value.split(",");
+                obj.yaxis = document.getElementById("yaxislabels").value.split(",");
+                obj.data = document.getElementById("dataInput").value.split(",");
+                obj.width = parseInt(document.getElementById("canvasWidth").value, 10);
+                obj.height = parseInt(document.getElementById("canvasHeight").value, 10);
+                if(obj.xaxis.length <= 0 || obj.yaxis.length <= 0 || obj.data.length <= 0 ){
+                    alert("Please enter at least one value for x-axis/y-axis and for the data.");
+                }
+                else{
+                    obj.graphType = "hbar";
+                    //convert to the integers
+                    for(var i = 0 ; i < obj.data.length ; i++){
+                        obj.data[i] = parseInt(obj.data[i], 10);
+                    }
+                    socket.emit('generate graph', obj);
+                }
+            }
+
+            function setGraphType(val){
+                graphType = val;
+            }
+
+            socket.on('response', function(res){
+                if(typeof res !== "undefined"){
+                    if(res.hasOwnProperty("data")){
+                        var img = document.createElement("img");
+                        img.src = res.data;
+                        //clear existing graph (if any)
+                        document.getElementById("graph").innerHTML = "";
+                        //set the new html
+                        document.getElementById("graph").appendChild(img);
+                    }
+                    else if(res.hasOwnProperty("error")){
+                        console.log("epic failure! see node logs...");
+                        document.getElementById("graph").innerHTML = res.error;
+                    }
+                }
+            });
+        </script>
+    </head>
+    <body onload="bodyOnLoad()">
+    <h1>canvas width:</h1><input type="text" value="500" id="canvasWidth" size="15"/><br/>
+    <h1>canvas height:</h1><input type="text" value="450" id="canvasHeight" size="15"/><br/>
+    <h1>x-axis:</h1><input type="text" value="" id="xaxislabels" size="50"/><br/>
+    <h1>y-axis:</h1><input type="text" value="" id="yaxislabels" size="50"/><br/>
+    <h1>data:</h1><input type="text" value="" id="dataInput" size="75"/><br/>
+    <button onclick="generateGraph()">Generate graph</button>
+    <br/>
+    <br/>
+    <div id="graph"></div>
+    </body>
 </html>
